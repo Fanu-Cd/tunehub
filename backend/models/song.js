@@ -4,8 +4,8 @@ const songSchema = new mongoose.Schema(
   {
     Title: { type: String, required: true },
     Artist: { type: String, required: true },
-    Album: { type: String, required: true },
-    Genre:{ type: String, required: true }
+    Album: { type: String, required: false },
+    Genre:{ type: String, required: false }
   },
   { collection: "song" }
 );

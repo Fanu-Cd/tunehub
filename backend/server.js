@@ -9,10 +9,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const mongodburl =
-  "mongodb+srv://fanu0925:mongodb_fanu0925RG@cluster0.uvyfcr8.mongodb.net/Tunehub";
+require('dotenv').config();
+const MONGODB_URL = process.env.MONGODB_URL
+
 mongoose
-  .connect(mongodburl, {
+  .connect(MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -54,14 +55,14 @@ app.post("/addNewSong", (req, response) => {
 
 //update song
 app.post("/updateSong",(req,response)=>{
-  const {oldTitle,newTitle,artist,album,genre}=req.body
-  Song.findOneAndUpdate({Title:oldTitle},{Title:newTitle,Artist:artist,Album:album,Genre:genre}).then(res=>{response.json({result:res})}).catch(err=>{response.json({error:true,errorMessage:err})})
+  const {id,title,artist,album,genre}=req.body
+  Song.findByIdAndUpdate(new mongoose.Types.ObjectId(id),{Title:title,Artist:artist,Album:album,Genre:genre}).then(res=>{response.json({result:res})}).catch(err=>{response.json({error:true,errorMessage:err})})
 })
 
 //delete song
-app.post("/deleteSong",(req,response)=>{
-  const {title}=req.body
-  Song.deleteOne({Title:title}).then(res=>{response.json({result:res})}).catch(err=>{response.json({error:true,errorMessage:err})})
+app.get("/deleteSong/:id",(req,response)=>{
+  const id=req.params.id
+  Song.findByIdAndDelete(new mongoose.Types.ObjectId(id)).then(res=>{response.json({result:res})}).catch(err=>{response.json({error:true,errorMessage:err})})
 })
 
 //to get total number of artists, albums, and genres
