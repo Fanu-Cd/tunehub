@@ -72,7 +72,6 @@ const EditModal: React.FC<ModalProps> = ({
   //Form Data Handlers
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    // setInput({...input,[name]:value})
     setInput((prevState) => ({ ...prevState, [name]: value }));
   };
   

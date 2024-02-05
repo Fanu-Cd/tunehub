@@ -1,5 +1,5 @@
 // Modal.js
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 // Styled Components

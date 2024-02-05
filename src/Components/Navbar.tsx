@@ -38,7 +38,7 @@ const NavBar: React.FC = () => {
           </Link>
         </div>
 
-        <AccountCircle></AccountCircle>
+        <AccountCircle />
       </div>
     </NavBar>
   );
